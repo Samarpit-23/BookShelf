@@ -72,7 +72,7 @@ const ProductDetails = () => {
       <div className="row container mt-2 ">
         <div className="col-3 ">
           <img
-            src={`/api/v1/product/product-photo/${product._id}`}
+            src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
             className="card-img-top"
             height={"300"}
           ></img>
@@ -169,7 +169,7 @@ const ProductDetails = () => {
             <div className="card m-2" style={{ width: "12rem"}}>
           
               <img
-                src={`/api/v1/product/product-photo/${p?._id}`}
+                src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p?._id}`}
                 className="card-img-top"
                 alt={p.name} height={"100px"}
               />
