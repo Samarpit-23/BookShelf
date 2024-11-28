@@ -18,7 +18,14 @@ connectDB();
 // rest object
 const app = express();
 // middlewares
-app.use(cors());
+// app.use(cors());
+app.use(cors(
+  {
+    origin: ["http://book-shelf-54vp.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  }
+));
+
 app.use(express.json());
 // routes
 app.use("/api/v1/auth", authRoutes);
