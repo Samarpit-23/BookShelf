@@ -9,6 +9,7 @@ import { SearchProvider } from "./context/search";
 import "antd/dist/reset.css";
 import { CartProvider } from "./context/cart";
 
+axios.defaults.baseURL = 'https://book-shelf-cc2nay3w2-samars-projects-c658d474.vercel.app';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
