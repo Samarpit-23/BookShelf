@@ -196,7 +196,7 @@ const HomePage = () => {
        
   <div className="carousel-inner " >
     <div className="carousel-item active">
-      <img src={`/api/v1/product/product-photo/${products[Math.floor(Math.random()*products.length)]._id}`} className="d-block w-50 m-auto" alt={products[0].name}  style={{ objectFit: 'fill',
+      <img src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${products[Math.floor(Math.random()*products.length)]._id}`} className="d-block w-50 m-auto" alt={products[0].name}  style={{ objectFit: 'fill',
   objectPosition: 'center',
   overflow:' hidden',
   height:'50vh'}}/>
