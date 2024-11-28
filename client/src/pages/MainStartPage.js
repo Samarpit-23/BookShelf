@@ -14,7 +14,7 @@ const MainStartPage = () => {
   return (
     <Layout title={"Home"}>
       <div>
-      {/* <img src={nextread} alt='nextRead!' className='card-img placeholder-glow' style={{height:'10vh'}}></img> */}
+      {<img src={nextread} alt='nextRead!' className='card-img placeholder-glow' style={{height:'10vh'}}></img> }
             <div className="card mt-3"  style={{border:'none'}} >
         <div className="row g-0">
           <div className="col-md-6">
