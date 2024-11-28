@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "proxy": "https://book-shelf-puce-iota.vercel.app/",
+  "proxy": "https://book-shelf-puce-iota.vercel.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
