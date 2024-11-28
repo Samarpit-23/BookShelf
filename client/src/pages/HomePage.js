@@ -153,8 +153,11 @@ const HomePage = () => {
        
       {/* banner image */}
       <div className="row ">
-        <div className="col-md-2 ms-1 filter-col d-flex flex-column ">
-          <h6 className="text-center">Filter By Category</h6>
+        <div className="col-md-2 ms-1 filter-col d-flex flex-column " 
+        style={{
+          boxShadow:"20px 5px 15px rgba(0, 0, 0, 0.3)"
+          }}>
+          <h5 className="text-center" style={{marginTop:"30px"}}>Filter By Category</h5>
           {categories?.map((c) => (
             <Checkbox
               className="filter"
@@ -165,7 +168,7 @@ const HomePage = () => {
             </Checkbox>
           ))}
           {/* price filter */}
-          <h6 className="text-center mt-4">Filter By Price</h6>
+          <h5 className="text-center mt-4">Filter By Price</h5>
           <div className="d-flex flex-column">
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {Price?.map((p) => (
@@ -188,9 +191,11 @@ const HomePage = () => {
           </div>
         </div>
         {/* {JSON.stringify(radio, null, 4)} */}
-        <div className="col-md-9 m-auto">
-
+        <div className="col-md-9 m-auto" >
           <h2 className="text-center text-bg-secondary mt-2">Find Your favorites</h2>
+        
+          
+        
         {products&&products.length>=2 ? 
       <div id="carouselExampleRide" className="carousel slide" data-bs-ride="true">
        
@@ -231,7 +236,9 @@ const HomePage = () => {
                 <div>
                 <div
                   className="card m-2"
-                  style={{ width: "16rem" }}
+                  style={{ width: "16rem" ,
+                    boxShadow:"20px 5px 15px rgba(0, 0, 0, 0.3) "
+                  }}
                   key={p._id}
                 >
                   <img

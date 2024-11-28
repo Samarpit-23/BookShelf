@@ -68,7 +68,9 @@ const ProductDetails = () => {
   };
   return (
     <Layout>
-      <div className="card m-5">
+      <div className="card m-5"  style={{
+    boxShadow:"20px 5px 15px rgba(0, 0, 0, 0.3) "}}>
+
       <div className="row container mt-2 ">
         <div className="col-3 ">
           <img
@@ -92,22 +94,7 @@ const ProductDetails = () => {
              <div className="col-2"><h6>Binding:</h6></div>
              <div className="col-6"><h6>{product.binding?product.binding:" "}</h6></div>
           </div>
-          {/* <div className="row">
-             <div className="col-2"><h6>ISBN No.:</h6></div>
-             <div className="col-6"><h6>{product.name}</h6></div>
-          </div>
-          <div className="row">
-             <div className="col-2"><h6>Publishers:</h6></div>
-             <div className="col-6"><h6>{product.name}</h6></div>
-          </div>
-          <div className="row">
-             <div className="col-2"><h6>Publish Date:</h6></div>
-             <div className="col-6"><h6>{product.name}</h6></div>
-          </div> */}
-          <div className="row">
-             <div className="col-2"><h6>Returnable:</h6></div>
-             <div className="col-6"><h6>{product.returnable?product.returnable:" "}</h6></div>
-          </div>
+          
           <h5 className="card-price">Price:${product.price}</h5>
           <div className="accordion accordion-flush" id="accordionExample">
             <div className="accordion-item">
@@ -145,19 +132,11 @@ const ProductDetails = () => {
                     Buy Now
                   </button>
           </div>
-      </div></div>
       </div>
-      
-        <div className="container text-center mt-3">
-        <div className="row justify-content-md-center">
-          <div className="col col-lg-2">
-           Premium Quality
-          </div>
-          
-        </div>
-      </div>
+    </div>
 
-      </div>
+  </div>
+    </div>
       <div className="row container">
         <h4 className="mt-2">Similar Products</h4>
         {/* {JSON.stringify(relatedProducts,null,4)} */}

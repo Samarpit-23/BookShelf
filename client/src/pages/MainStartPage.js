@@ -20,7 +20,7 @@ const MainStartPage = () => {
           <div className="col-md-6">
             <div className="card m-5" style={{ border:'none'}}>
               <div className="card-body">
-                <h1 className="card-title" style={{fontWeight:'bolder'}}>Welcome to BookBazaar </h1>
+                <h1 className="card-title" style={{fontWeight:'bolder'}}>Welcome to The BookShelf </h1>
                 <p className="card-text">where every book has a story to tell! Our shelves are stocked with a carefully curated selection of books from all genres, ensuring that every reader finds their perfect match. Whether you’re a lifelong bibliophile or just beginning your reading journey, our knowledgeable staff is here to help you discover new favorites. Visit us in-store or explore our collection online. Happy reading!
                 </p>
                 <Link to={'/home'} className="btn btn-primary  " style={{width:'10rem'}}>Explore</Link>

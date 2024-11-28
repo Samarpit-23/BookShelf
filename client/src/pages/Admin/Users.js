@@ -28,7 +28,7 @@ const Users = () => {
                 <AdminMenu />
             </div>
             <div className='col-md-9'>
-               <h1 className='text-center'>All Users List</h1> 
+               <h1 className='text-center'>All Users</h1> 
                <div className='d-flex  flex-wrap align-items-stretch overflow-auto'>
                 {users?.map((p)=>(
                    <Link key={p._id} className='products-link'>

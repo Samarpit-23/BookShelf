@@ -154,3 +154,8 @@ form{
     background-color: rgb(32, 116, 104);
     color: white;
   }
+
+  .card{
+    box-shadow:"20px 5px 15px rgba(0, 0, 0, 0.3) "
+  }
+  
