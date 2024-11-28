@@ -10,7 +10,7 @@ import "antd/dist/reset.css";
 import { CartProvider } from "./context/cart";
 import axios from "axios";
 
-axios.defaults.baseURL = 'https://book-shelf-cc2nay3w2-samars-projects-c658d474.vercel.app';
+axios.defaults.baseURL = 'http://book-shelf-puce-iota.vercel.app';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
