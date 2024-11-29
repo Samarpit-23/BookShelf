@@ -1,5 +1,5 @@
 import express from "express";
-import { addItemToCartController, getCartController, removeItemFromCartController } from "../controllers/cartControllers.js";
+import { addItemToCartController, getCartController, productCartController, removeCartController, removeItemFromCartController } from "../controllers/cartControllers.js";
 import { requireSignIn } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -11,6 +11,10 @@ router.get('/getCart/:email', requireSignIn, getCartController);
 router.post('/addto-cart', requireSignIn, addItemToCartController);
 
 // Remove item from the cart
-router.delete('/cart/:productId', requireSignIn, removeItemFromCartController);
+// router.delete('/cart/:productId', requireSignIn, removeItemFromCartController);
 
+router.post("/removeFromCart", requireSignIn,removeCartController);
+
+//get product
+router.post('/product-cart/:id',productCartController)
 export default router;

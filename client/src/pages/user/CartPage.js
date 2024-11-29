@@ -26,12 +26,12 @@ const CartPage = () => {
         const user = JSON.parse(userdata);
         const payload = user.user;
         const email = payload.email;
-        console.log("payload", payload);
+        // console.log("payload", payload);
         const { data } = await axios.get(`/api/getCart/${email}`,);
-        console.log("data", data);
+        // console.log("data", data);
         setCart(data[0].products);
         console.log("Cart",cart);
-        
+        // console.log(products);
         toast.success("check your cart");
       } else {
         navigate("/login");
