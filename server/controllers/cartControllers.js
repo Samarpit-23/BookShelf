@@ -49,7 +49,7 @@ export const addItemToCartController = async (req, res, next) => {
       return res.json({ success: true, createdCart });
     }
  // Cart exists, check if product already exists
- console.log(cart);
+//  console.log(cart);
  
  const productIndex = cart.products.findIndex((p) => p.id === productId);
   console.log(productIndex);
@@ -72,24 +72,24 @@ export const addItemToCartController = async (req, res, next) => {
 };
 
 // Remove item from the cart
-export const removeItemFromCartController = async (req, res) => {
-  try {
-    const { productId } = req.params;
-    const cart = await Cart.findOne({ userId: req.user.id });
+// export const removeItemFromCartController = async (req, res) => {
+//   try {
+//     const { productId } = req.params;
+//     const cart = await Cart.findOne({ userId: req.user.id });
 
-    if (!cart) {
-      return res.status(404).json({ message: "Cart not found" });
-    }
+//     if (!cart) {
+//       return res.status(404).json({ message: "Cart not found" });
+//     }
 
-    cart.items = cart.items.filter(
-      (item) => item.productId.toString() !== productId
-    );
-    await cart.save();
-    res.json(cart);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+//     cart.items = cart.items.filter(
+//       (item) => item.productId.toString() !== productId
+//     );
+//     await cart.save();
+//     res.json(cart);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 
 export const removeCartController = async (req, res) => {
