@@ -137,7 +137,7 @@ const HomePage = () => {
     }
     } catch (error) {
       console.log(error);
-      toast.error("Book Cannot be added to Cart");
+      toast.error("Only normal user can add item to cart");
     }
   };
   // useEffect(()=>{
