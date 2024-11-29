@@ -5,7 +5,6 @@ import { mongo } from "mongoose";
 export const getCartController = async (req, res,next) => {
   try {
     const user=req.body;
-    console.log(req.params)
     const userEmail=user.email
     console.log(userEmail)
     const cart = await Cart.find();
@@ -23,18 +22,21 @@ export const getCartController = async (req, res,next) => {
 // Add item to the cart
 export const addItemToCartController = async (req, res, next) => {
   try {
-    const productToAdd=req.body.product
-    const user=req.body.user.user
-    console.log(user)
-    const productId = productToAdd._id;
-    const quantity = 1;
-    if (!productToAdd || !user) {
+    const {user,product}=req.body;
+    // console.log(user)
+    // console.log(product);
+    
+    if (!product || !user) {
       return res.status(400).json({ message: "Product and user details are required" });
     }
+    const productId = product._id;
+    const quantity = 1;
     const userEmail = user.email;
     // console.log(productId,userEmail)
   
     let cart = await Cart.findOne({ userEmail });
+    // console.log(cart);
+    
     if (!cart) {
       const newCart = new Cart({
         products: [{ id: productId, quantity }],
@@ -45,8 +47,11 @@ export const addItemToCartController = async (req, res, next) => {
       return res.json({ success: true, createdCart });
     }
  // Cart exists, check if product already exists
- const productIndex = cart.products.findIndex(p => p.id.equals(productId));
-    
+ console.log(cart);
+ 
+ const productIndex = cart.products.findIndex((p) => p.id === productId);
+  console.log(productIndex);
+  
  if (productIndex > -1) {
    // Product exists, update quantity
    cart.products[productIndex].quantity += quantity;

@@ -118,9 +118,12 @@ const HomePage = () => {
   const AddtoCart = async (product) => {
     try {
       const userdata = localStorage.getItem("auth");
-      if(userdata){
+      console.log(product);
       console.log(JSON.parse(userdata));
-      const User=JSON.parse(userdata)
+      
+      
+      if(userdata){
+      const User=JSON.parse(userdata).user
       const payload = {
         product: product,
         user: User
