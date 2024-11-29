@@ -5,7 +5,7 @@ import { requireSignIn } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 // Get the current user's cart
-router.get('/getCart', requireSignIn, getCartController);
+router.get('/getCart/:email', requireSignIn, getCartController);
 
 // Add item to the cart
 router.post('/addto-cart', requireSignIn, addItemToCartController);

@@ -4,10 +4,11 @@ import { mongo } from "mongoose";
 // Get the current user's cart
 export const getCartController = async (req, res,next) => {
   try {
-    const user=req.body;
-    const userEmail=user.email
-    console.log(userEmail)
-    const cart = await Cart.find();
+    const userEmail=req.params.email;
+    // const userEmail=email
+    
+    // console.log(user,userEmail)
+    const cart = await Cart.find({userEmail});
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }

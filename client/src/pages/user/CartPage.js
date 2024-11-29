@@ -20,13 +20,18 @@ const CartPage = () => {
   const fetchCart = useCallback(async () => {
     try {
       const userdata = localStorage.getItem("auth");
+      console.log(userdata);
+      
       if (userdata) {
         const user = JSON.parse(userdata);
         const payload = user.user;
+        const email = payload.email;
         console.log("payload", payload);
-        const { data } = await axios.post("/api/getCart", { payload });
+        const { data } = await axios.get(`/api/getCart/${email}`,);
         console.log("data", data);
-        setCart(data.products);
+        setCart(data[0].products);
+        console.log("Cart",cart);
+        
         toast.success("check your cart");
       } else {
         navigate("/login");
@@ -58,7 +63,7 @@ const CartPage = () => {
       }
       setProducts(productDetails);
     };
-    if (cart.length) {
+    if (cart?.length) {
       fetchProducts();
     }
   }, [cart]);
@@ -154,13 +159,24 @@ const CartPage = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-8" style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "20px"
+          }}>
             {cart?.map((p) => (
-              <div className="row card flex-row mb-2 p-3 " key={p._id}>
+              <div className="row card flex-row mb-2 p-3 " style={{ 
+                  width: "20rem",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  border: "1px solid #000",
+                  boxShadow:"20px 5px 15px rgba(0, 0, 0, 0.3) "
+              }} key={p._id}>
                 <div className="col-md-4">
                   <Link to={`/product/${products[p.id]?.slug}`}>
                     <img
-                      src={`/api/v1/product/product-photo/${p.id}`}
+                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p.id}`}
                       height={"100px"}
                       width={"100px"}
                       className="card-img-top"
@@ -185,7 +201,13 @@ const CartPage = () => {
               </div>
             ))}
           </div>
-          <div className="col-md-4 text-center">
+          <div className="col-md-4 text-center" style=
+                {{
+                  border: "1px solid #000",
+                  borderRadius:"10px",
+                  boxShadow:"15px 5px 15px rgba(0, 0, 0, 0.3)  "
+                }}>
+
             <h4>Cart Summary</h4>
             <p>Total | Checkout | Payment</p>
             <hr />
