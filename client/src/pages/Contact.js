@@ -40,7 +40,7 @@ function Contact() {
                       </div> 
                       <div className='row'>
                       <div className="col-1"><h5 className='mt-3 text-left' ><FaMailBulk /> </h5> </div>
-                      <div className="col-6"><h5 className='mt-3 text-left' >bookBazzar@test.com</h5></div>
+                      <div className="col-6"><h5 className='mt-3 text-left' >TheBookShelf@test.com</h5></div>
                       </div> 
                       
                   </div>

@@ -114,45 +114,42 @@ const HomePage = () => {
     getAllCategory();
     getTotal();
   }, []);
+
   //add to cart
   const AddtoCart = async (product) => {
     try {
       const userdata = localStorage.getItem("auth");
-      console.log(product);
-      console.log(JSON.parse(userdata));
-      
-      
-      if(userdata){
-      const User=JSON.parse(userdata).user
-      const payload = {
-        product: product,
-        user: User
-      };
-      const { data } = await axios.post("/api/addto-cart", payload);
-      setCart([...cart, data]);
-      toast.success("Item added to cart");
-    }
-    else{
-      navigate('/login')
-    }
+      if (userdata) {
+        const User = JSON.parse(userdata).user;
+        const payload = {
+          product: product,
+          user: User
+        };
+        console.log("Payload being sent to backend:", payload);  // Add this line to check the payload
+        const { data } = await axios.post("/api/addto-cart", payload);
+        setCart((prevCart) => [...prevCart, data]);
+        toast.success("Item added to cart");
+      } else {
+        navigate("/login");
+      }
     } catch (error) {
-      console.log(error);
-      toast.error("Only normal user can add item to cart");
+      console.error(error);
+      toast.error("Only normal users can add items to the cart.");
     }
   };
+  
   // useEffect(()=>{
   //   if(auth?.token) AddtoCart()
   // },[auth?.token])
 
   return (
     <Layout title={"All Products- Best Offers"}>
-      {/* banner image */}
-      {/* <img
-        src="/images/NextRead.jpg"
+      {<img
+        src="images\Books.jpg"
         className="banner-img"
         alt="bannerimage"
         width={"100%"}
-      /> */}
+      />}
        
       {/* banner image */}
       <div className="row ">
@@ -160,12 +157,13 @@ const HomePage = () => {
         style={{
           boxShadow:"20px 5px 15px rgba(0, 0, 0, 0.3)"
           }}>
-          <h5 className="text-center" style={{marginTop:"30px"}}>Filter By Category</h5>
+          <h5 className="text-center" style={{marginTop:"100px"}}>Filter By Category</h5>
           {categories?.map((c) => (
             <Checkbox
               className="filter"
               key={c._id}
               onChange={(event) => handleFilter(event.target.checked, c._id)}
+              style={{marginLeft:"15px"}}
             >
               {c.name}
             </Checkbox>
@@ -173,7 +171,8 @@ const HomePage = () => {
           {/* price filter */}
           <h5 className="text-center mt-4">Filter By Price</h5>
           <div className="d-flex flex-column">
-            <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+            <Radio.Group onChange={(e) => setRadio(e.target.value)}  
+              style={{marginLeft:"15px"}}>
               {Price?.map((p) => (
                 <div key={p._id}>
                   <Radio value={p.array} className="filter">
@@ -195,31 +194,40 @@ const HomePage = () => {
         </div>
         {/* {JSON.stringify(radio, null, 4)} */}
         <div className="col-md-9 m-auto" >
-          <h2 className="text-center text-bg-secondary mt-2">Find Your favorites</h2>
+          {/* <h2 className="text-center text-bg-secondary mt-2">Find Your favorites</h2> */}
         
-          
-        
+      
         {products&&products.length>=2 ? 
       <div id="carouselExampleRide" className="carousel slide" data-bs-ride="true">
        
   <div className="carousel-inner " >
     <div className="carousel-item active">
-      <img src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${products[Math.floor(Math.random()*products.length)]._id}`} className="d-block w-50 m-auto" alt={products[0].name}  style={{ objectFit: 'fill',
-  objectPosition: 'center',
-  overflow:' hidden',
-  height:'50vh'}}/>
+      <img src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${products[Math.floor(Math.random()*products.length)]._id}`} className="d-block w-50 m-auto" alt={products[0].name}  style={{ 
+      objectFit: 'fill',
+      objectPosition: 'center',
+      overflow:' hidden',
+      height:'50vh'}}/>
     </div>
     <div className="carousel-item">
-      <img src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${products[Math.floor(Math.random()*products.length)]._id}`} className="d-block w-50 m-auto" alt={products[1].name} style={{ objectFit: 'fill',
-  objectPosition: 'center',
-  overflow:' hidden',
-  height:'50vh'}} />
+      <img src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${products[Math.floor(Math.random()*products.length)]._id}`} className="d-block w-50 m-auto" alt={products[1].name} style={{ 
+      objectFit: 'fill',
+      objectPosition: 'center',
+      overflow:' hidden',
+      height:'50vh'}} />
     </div>
     <div className="carousel-item">
-      <img src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${products[Math.floor(Math.random()*products.length)]._id}`} className="d-block w-50 m-auto " alt={products[2].name} style={{ objectFit: 'fill',
-  objectPosition: 'center',
-  overflow:' hidden',
-  height:'50vh'}}/>
+      <img src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${products[Math.floor(Math.random()*products.length)]._id}`} className="d-block w-50 m-auto " alt={products[2].name} style={{ 
+        objectFit: 'fill',
+        objectPosition: 'center',
+        overflow:' hidden',
+        height:'50vh'}}/>
+    </div>
+    <div className="carousel-item">
+      <img src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${products[Math.floor(Math.random()*products.length)]._id}`} className="d-block w-50 m-auto " alt={products[3].name} style={{ 
+        objectFit: 'fill',
+        objectPosition: 'center',
+        overflow:' hidden',
+        height:'50vh'}}/>
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">

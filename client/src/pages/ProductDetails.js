@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/auth";
+
 const ProductDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
@@ -48,8 +49,8 @@ const ProductDetails = () => {
     try {
       const userdata = localStorage.getItem("auth");
       if(userdata){
-      console.log(JSON.parse(userdata));
-      const User=JSON.parse(userdata)
+     // console.log(JSON.parse(userdata));
+      const User=JSON.parse(userdata).user;
       const payload = {
         product: product,
         user: User
@@ -80,8 +81,8 @@ const ProductDetails = () => {
           ></img>
         </div>
         <div className="col-7 ">
-          <h1 className="text-center"><h5>{product.name}</h5></h1>
-          <h4>Book Details</h4>
+          <h1 className="text-center"><h4>{product.name}</h4></h1>
+          {/* <h4>Book Details</h4> */}
           <div className="row">
              <div className="col-2"><h6>Author:</h6></div>
              <div className="col-6"><h6>{product.author?product.author:" "}</h6></div>
@@ -138,14 +139,19 @@ const ProductDetails = () => {
   </div>
     </div>
       <div className="row container">
-        <h4 className="mt-2">Similar Products</h4>
+        <h4 className="mt-2" 
+        style={{
+          paddingBottom: "10px",
+          borderBottom: "2px solid #ddd",
+        }}
+        >Similar Products</h4>
         {/* {JSON.stringify(relatedProducts,null,4)} */}
         {relatedProducts.length < 1 && (
           <p className="text-center">No Similar Products found</p>
         )}
         <div className="d-flex flex-wrap">
           {relatedProducts?.map((p) => (
-            <div className="card m-2" style={{ width: "12rem"}}>
+            <div className="card m-2" style={{ width: "12rem",boxShadow:"20px 5px 15px rgba(0, 0, 0, 0.3)"}}>
           
               <img
                 src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p?._id}`}
@@ -159,10 +165,18 @@ const ProductDetails = () => {
                 <button
                   className="btn btn-warning ms-1"
                   onClick={() => navigate(`/product/${p.slug}`)}
+                  style={{padding:"4px"}}
                 >
-                  More Details
+                More  Details
                 </button>
-                <button class="btn btn-secondary mt-1">ADD TO CART</button>
+                <button class="btn btn-secondary mt-1"  style={{padding:"4px" , paddingRight:"15px"}}
+                  onClick={()=>{
+                    if(userdata)
+                    {AddtoCart(p);}
+                  else{
+                    navigate('/login')
+                  }}}
+                >Add to Cart</button>
               </div>
             </div>
           ))}

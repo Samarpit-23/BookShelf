@@ -7,7 +7,7 @@ function About() {
          <div className='contact-container  bg-info bg-opacity-10'>
           <div className='contact-row1 row'>
           <img src='/images/about.jpg'  height={201}></img>
-          <h3 className='mt-2 text-center bg-info bg-opacity-10' >About BookBazaar</h3>
+          <h3 className='mt-2 text-center bg-info bg-opacity-10' >About The Bookshelf</h3>
             <div className='contact-details col-md-12'>
                 <p className='mt-3 card p-3 border-info'> Dear readers,
                   <br/>

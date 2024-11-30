@@ -34,6 +34,8 @@ function App() {
   return (
     <>
       <Routes>
+        
+        
         <Route path="/home" element={<HomePage />} />
         <Route path="/" element={<MainStartPage />} />
         <Route path="/product/:slug" element={<ProductDetails />} />

@@ -86,27 +86,52 @@ const CartPage = () => {
     }
   };
 
+
   const removeCartItem = async (pid) => {
     try {
       const userdata = localStorage.getItem("auth");
       if (userdata) {
         const user = JSON.parse(userdata);
         const userEmail = user.user.email;
-        await axios.post("/api/removeFromCart", { productId: pid, userEmail });
-      }
-      
-      // Remove the item from the local state
-      let myCart = [...cart];
-      let index = myCart.findIndex((item) => item._id === pid);
-      myCart.splice(index, 1);
-      setCart(myCart);
+        const { data } = await axios.post("/api/removeFromCart", { productId: pid, userEmail });
   
-      toast.success("Item removed from cart");
+        // Check if cart data is valid, otherwise reset to empty
+        if (data && Array.isArray(data.cart)) {
+          setCart(data.cart);  // Set the updated cart
+          toast.success("Item removed from cart");
+        } else {
+          toast.error("Error updating cart");
+        }
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error removing item from cart:", error);
       toast.error("Error removing item from cart");
     }
   };
+  
+  
+
+  // const removeCartItem = async (pid) => {
+  //   try {
+  //     const userdata = localStorage.getItem("auth");
+  //     if (userdata) {
+  //       const user = JSON.parse(userdata);
+  //       const userEmail = user.user.email;
+  //       await axios.post("/api/removeFromCart", { productId: pid, userEmail });
+  //     }
+      
+  //     // Remove the item from the local state
+  //     let myCart = [...cart];
+  //     let index = myCart.findIndex((item) => item._id === pid);
+  //     myCart.splice(index, 1);
+  //     setCart(myCart);
+  
+  //     toast.success("Item removed from cart");
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("Error removing item from cart");
+  //   }
+  // };
   
 
   const getToken = async () => {
@@ -147,7 +172,7 @@ const CartPage = () => {
         <div className="row">
           <div className="col-md-12">
             <h1 className="text-center bg-light p-2 mb-1">
-              {`Hello ${auth?.token && auth?.user?.name}`}
+              {`Hello! ${auth?.token && auth?.user?.name}`}
             </h1>
             <h4 className="text-center">
               {cart?.length >= 1
@@ -166,11 +191,12 @@ const CartPage = () => {
           }}>
             {cart?.map((p) => (
               <div className="row card flex-row mb-2 p-3 " style={{ 
-                  width: "20rem",
+                  width: "320px",
+                  height: "270px",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  border: "1px solid #000",
+                  //border: "1px solid #000",
                   boxShadow:"20px 5px 15px rgba(0, 0, 0, 0.3) "
               }} key={p._id}>
                 <div className="col-md-4">
@@ -186,8 +212,16 @@ const CartPage = () => {
                 </div>
                 <div className="col-md-8">
                   <h5>
-                    <Link to={`/product/${products[p.id]?.slug}`}>{products[p.id]?.name}</Link>
+                    <Link to={`/product/${products[p.id]?.slug}`}style={{
+                      textDecoration: "none", 
+                      color:"#000000",
+                      fontWeight: "500"
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = "#0056b3")} 
+                    onMouseLeave={(e) => (e.target.style.color = "#000000")}
+                    >{products[p.id]?.name}</Link>
                   </h5>
+                  
                   <p>{products[p.id]?.description?.substring(0, 30)}</p>
                   <p>Quantity : {p.quantity}</p>
                   <h5>Price: ${products[p.id]?.price}</h5>
@@ -203,9 +237,9 @@ const CartPage = () => {
           </div>
           <div className="col-md-4 text-center" style=
                 {{
-                  border: "1px solid #000",
+                 border: "0.2px solid #E5E4E2",
                   borderRadius:"10px",
-                  boxShadow:"15px 5px 15px rgba(0, 0, 0, 0.3)  "
+                  boxShadow:"20px 5px 15px rgba(0, 0, 0, 0.3) "
                 }}>
 
             <h4>Cart Summary</h4>

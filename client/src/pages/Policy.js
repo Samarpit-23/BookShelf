@@ -11,7 +11,7 @@ function Policy() {
             <div className='contact-details'>
                 <p className='mt-3'>91- 999999999</p>
                 <p className='mt-3'> test@test.com</p>
-                <p>91- 999999999</p>
+               
             </div>
         </div>
     </Layout>
